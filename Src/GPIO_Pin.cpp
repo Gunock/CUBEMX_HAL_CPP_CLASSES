@@ -5,7 +5,7 @@
  *      Author: Tomasz Kiljañczyk
  */
 
-#include "GPIO_Pin.h"
+#include "GPIO_Pin.hpp"
 
  /*
   * @biref Initializes GPIO_Pin.
@@ -22,7 +22,7 @@ GPIO_Pin::~GPIO_Pin() {}
  * @biref Sets the pin.
  * @retval None
  */
-void GPIO_Pin::on()
+void GPIO_Pin::on() const
 {
 	HAL_GPIO_WritePin(port, pin, GPIO_PIN_SET);
 }
@@ -31,7 +31,7 @@ void GPIO_Pin::on()
  * @biref Clears the pin.
  * @retval None
  */
-void GPIO_Pin::off()
+void GPIO_Pin::off() const
 {
 	HAL_GPIO_WritePin(port, pin, GPIO_PIN_RESET);
 }
@@ -40,7 +40,7 @@ void GPIO_Pin::off()
  * @biref Toggles the pin.
  * @retval None
  */
-void GPIO_Pin::toggle()
+void GPIO_Pin::toggle() const
 {
 	HAL_GPIO_TogglePin(port, pin);
 }
@@ -53,7 +53,7 @@ void GPIO_Pin::toggle()
  *           	@arg false: to set the pin
  * @retval None
  */
-void GPIO_Pin::write(const bool& state)
+void GPIO_Pin::write(const bool& state) const
 {
 	if (state == false) { HAL_GPIO_WritePin(port, pin, GPIO_PIN_RESET); }
 	else if (state == true) { HAL_GPIO_WritePin(port, pin, GPIO_PIN_SET); }
@@ -67,7 +67,7 @@ void GPIO_Pin::write(const bool& state)
  *           	@arg GPIO_PIN_SET: to set the pin
  * @retval None
  */
-void GPIO_Pin::write(const GPIO_PinState& state)
+void GPIO_Pin::write(const GPIO_PinState& state) const
 {
 	HAL_GPIO_WritePin(port, pin, state);
 }
@@ -76,7 +76,7 @@ void GPIO_Pin::write(const GPIO_PinState& state)
  * @biref Reads the pin.
  * @retval The pin value.
  */
-bool GPIO_Pin::read()
+bool GPIO_Pin::read() const
 {
 	if (HAL_GPIO_ReadPin(port, pin) == GPIO_PIN_RESET) { return false; }
 	else { return true; }
