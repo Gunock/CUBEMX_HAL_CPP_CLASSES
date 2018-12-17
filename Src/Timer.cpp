@@ -46,3 +46,18 @@ void Timer::start_interrupt() const
 {
 	HAL_TIM_Base_Start_IT(handle);
 }
+
+void Timer::start_PWM_channel(const uint8_t channel) const
+{
+	HAL_TIM_PWM_Start(handle, channel);
+}
+
+void Timer::set_PWM_channel_ccr(const uint8_t channel, const uint16_t value) const
+{
+	switch(channel){
+	case 1 : handle->Instance->CCR1 = value; break;
+	case 2 : handle->Instance->CCR2 = value; break;
+	case 3 : handle->Instance->CCR3 = value; break;
+	case 4 : handle->Instance->CCR4 = value; break;
+	}
+}
