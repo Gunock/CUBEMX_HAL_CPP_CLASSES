@@ -58,7 +58,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if (htim->Instance == TIM4)
 	{
-		//pins_toggle({&redLED, &greenLED});
 		pins_toggle({&blueLED, &orangeLED, &redLED});
 	}
 }

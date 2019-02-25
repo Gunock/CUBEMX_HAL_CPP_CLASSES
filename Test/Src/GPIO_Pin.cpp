@@ -100,15 +100,8 @@ void pins_toggle(const std::initializer_list<const GPIO_Pin*>& pins)
 		/*
 		 * key: GPIO port
 		 * value: pin sum
-		 * max_size: 5 (ports A, B, C, D, E)
 		 */
-		std::unordered_map<GPIO_TypeDef*, uint16_t> portPinMap {
-			{GPIOA, 0},
-			{GPIOB, 0},
-			{GPIOC, 0},
-			{GPIOD, 0},
-			{GPIOE, 0}
-		};
+		std::unordered_map<GPIO_TypeDef*, uint16_t> portPinMap;
 
 		for(const GPIO_Pin* pin : pins) { portPinMap[pin->port] |= pin->pin; }
 		for(const auto& elem : portPinMap)
@@ -133,15 +126,8 @@ void pins_write(const std::initializer_list<const GPIO_Pin*>& pins, const GPIO_P
 		/*
 		 * key: GPIO port
 		 * value: pin sum
-		 * max_size: 5 (ports A, B, C, D, E)
 		 */
-		std::unordered_map<GPIO_TypeDef*, uint16_t> portPinMap {
-			{GPIOA, 0},
-			{GPIOB, 0},
-			{GPIOC, 0},
-			{GPIOD, 0},
-			{GPIOE, 0}
-		};
+		std::unordered_map<GPIO_TypeDef*, uint16_t> portPinMap;
 
 		for(const GPIO_Pin* pin : pins) { portPinMap[pin->port] |= pin->pin; }
 		for(const auto& elem : portPinMap)
