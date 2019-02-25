@@ -9,14 +9,19 @@
 #define ADC12_HPP_
 
 #include "main.h"
-class ADC12 {
-	const float ref_voltage = 2.95;
-	const int16_t max_value = 4095;
+
+class ADC12 final {
 	ADC_HandleTypeDef* handle;
 
+	const float ref_voltage = 2.95;
+	const int16_t max_value = 4095;
+
 public:
-	ADC12(ADC_HandleTypeDef* hadcx);
-	~ADC12();
+	explicit ADC12() : handle(nullptr) {}
+	explicit ADC12(ADC_HandleTypeDef* hadcx);
+	~ADC12() = default;
+
+	void init(ADC_HandleTypeDef* hadcx);
 
 	int16_t get_value() const;
 	float get_voltage() const;

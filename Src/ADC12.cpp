@@ -9,7 +9,10 @@
 
 ADC12::ADC12(ADC_HandleTypeDef* hadcx) : handle(hadcx) {}
 
-ADC12::~ADC12() {}
+void ADC12::init(ADC_HandleTypeDef* hadcx)
+{
+	handle = hadcx;
+}
 
 int16_t ADC12::get_value() const
 {
@@ -23,6 +26,6 @@ int16_t ADC12::get_value() const
 
 float ADC12::get_voltage() const
 {
-	return (ref_voltage / max_value)*(float)this->get_value();
+	return (this->ref_voltage / this->max_value)*(float)this->get_value();
 }
 

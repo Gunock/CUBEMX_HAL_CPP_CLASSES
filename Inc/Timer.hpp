@@ -10,19 +10,25 @@
 
 #include "main.h"
 
-class Timer {
+class Timer final {
+private:
 	TIM_HandleTypeDef* handle;
 
 public:
+	explicit Timer() : handle(nullptr) {}
 	explicit Timer(TIM_HandleTypeDef* htimx);
-	~Timer();
+	~Timer() = default;
+
+	void init(TIM_HandleTypeDef* handle_);
 
 	void set(const uint16_t& prescaler, const uint16_t& period) const;
 	void set_period(const uint16_t& period) const;
+	void set_prescaler(const uint16_t& prescaler) const;
 
 	void start() const;
 	void stop() const;
 	void interrupt_enable() const;
+	void interrupt_disable() const;
 
 	void start_interrupt() const;
 

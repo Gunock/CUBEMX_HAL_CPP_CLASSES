@@ -10,7 +10,10 @@
 
 UART::UART(UART_HandleTypeDef* huartx) : handle(huartx){}
 
-UART::~UART() {}
+void UART::init(UART_HandleTypeDef* huartx)
+{
+	handle = huartx;
+}
 
 void UART::transmit(uint8_t* tData, const uint32_t& size) const
 {

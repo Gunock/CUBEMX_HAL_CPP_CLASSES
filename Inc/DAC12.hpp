@@ -10,15 +10,19 @@
 
 #include "main.h"
 
-class DAC12 {
+class DAC12 final {
+public:
 	DAC_HandleTypeDef* handle;
 	uint8_t channel;
 
 	uint16_t value = 0;
 
 public:
+	explicit DAC12() : handle(nullptr), channel(0) {}
 	explicit DAC12(DAC_HandleTypeDef* hdacx, uint8_t channel);
-	~DAC12();
+	~DAC12() = default;
+
+	void init(DAC_HandleTypeDef* hdacx, uint8_t channel);
 
 	void set_value(const uint16_t& value_);
 	const int16_t get_value() const;

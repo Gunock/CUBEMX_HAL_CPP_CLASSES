@@ -9,15 +9,16 @@
 #define GPIO_PIN_HPP_
 
 #include "main.h"
+#include <initializer_list>
 
-class GPIO_Pin {
-private:
+
+class GPIO_Pin final {
+public:
 	GPIO_TypeDef* port;
 	const uint16_t pin = -1;
 
-public:
 	explicit GPIO_Pin(GPIO_TypeDef* GPIOx, const uint16_t& GPIO_Pin);
-	~GPIO_Pin();
+	~GPIO_Pin() = default;
 
 	void on() const;
 	void off() const;
@@ -26,5 +27,9 @@ public:
 	void write(const GPIO_PinState& state) const;
 	bool read() const;
 };
+
+void pins_toggle(const std::initializer_list<const GPIO_Pin*>& pins);
+void pins_write(const std::initializer_list<const GPIO_Pin*>& pins, const GPIO_PinState& state);
+void pins_write(const std::initializer_list<const GPIO_Pin*>& pins, const bool& state);
 
 #endif /* GPIO_PIN_HPP_ */

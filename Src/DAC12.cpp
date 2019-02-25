@@ -8,9 +8,13 @@
 #include <DAC12.hpp>
 
 DAC12::DAC12(DAC_HandleTypeDef* hdacx, uint8_t channel)
-			: handle(hdacx),channel(channel){}
+			: handle(hdacx),channel(channel) {}
 
-DAC12::~DAC12() {}
+void DAC12::init(DAC_HandleTypeDef* hdacx, uint8_t channel)
+{
+	handle = hdacx;
+	this->channel = channel;
+}
 
 void DAC12::set_value(const uint16_t& value_)
 {

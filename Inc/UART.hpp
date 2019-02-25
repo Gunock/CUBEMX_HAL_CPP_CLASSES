@@ -10,12 +10,15 @@
 
 #include "main.h"
 
-class UART {
+class UART final {
 	UART_HandleTypeDef* handle;
 
 public:
-	UART(UART_HandleTypeDef* huartx);
-	~UART();
+	explicit UART() : handle(nullptr) {}
+	explicit UART(UART_HandleTypeDef* huartx);
+	~UART() = default;
+
+	void init(UART_HandleTypeDef* huartx);
 
 	void transmit(uint8_t* tData, const uint32_t& size) const;
 	void transmit(const char* tData) const;
