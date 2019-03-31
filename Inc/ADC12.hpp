@@ -23,8 +23,8 @@ public:
 
 	void init(ADC_HandleTypeDef* hadcx);
 
-	int16_t get_value() const;
-	float get_voltage() const;
+	uint16_t read_value() const;
+	float read_voltage() const;
 };
 
 #endif /* ADC12_HPP_ */

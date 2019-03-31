@@ -107,7 +107,6 @@ void HAL_MspInit(void)
 */
 void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
 {
-
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   if(hadc->Instance==ADC1)
   {
@@ -139,10 +138,8 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
 * @param hadc: ADC handle pointer
 * @retval None
 */
-
 void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
 {
-
   if(hadc->Instance==ADC1)
   {
   /* USER CODE BEGIN ADC1_MspDeInit 0 */
@@ -171,7 +168,6 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
 */
 void HAL_DAC_MspInit(DAC_HandleTypeDef* hdac)
 {
-
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   if(hdac->Instance==DAC)
   {
@@ -203,10 +199,8 @@ void HAL_DAC_MspInit(DAC_HandleTypeDef* hdac)
 * @param hdac: DAC handle pointer
 * @retval None
 */
-
 void HAL_DAC_MspDeInit(DAC_HandleTypeDef* hdac)
 {
-
   if(hdac->Instance==DAC)
   {
   /* USER CODE BEGIN DAC_MspDeInit 0 */
@@ -235,7 +229,6 @@ void HAL_DAC_MspDeInit(DAC_HandleTypeDef* hdac)
 */
 void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
 {
-
   if(htim_base->Instance==TIM4)
   {
   /* USER CODE BEGIN TIM4_MspInit 0 */
@@ -255,7 +248,6 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
 
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
 {
-
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   if(htim->Instance==TIM4)
   {
@@ -286,10 +278,8 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
 * @param htim_base: TIM_Base handle pointer
 * @retval None
 */
-
 void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
 {
-
   if(htim_base->Instance==TIM4)
   {
   /* USER CODE BEGIN TIM4_MspDeInit 0 */
@@ -315,7 +305,6 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
 */
 void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 {
-
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   if(huart->Instance==USART3)
   {
@@ -353,10 +342,8 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 * @param huart: UART handle pointer
 * @retval None
 */
-
 void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 {
-
   if(huart->Instance==USART3)
   {
   /* USER CODE BEGIN USART3_MspDeInit 0 */

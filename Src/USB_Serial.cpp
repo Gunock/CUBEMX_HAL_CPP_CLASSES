@@ -20,7 +20,7 @@ bool USB_Serial::enabled = false;
 
 void USB_Serial::setEnabled(const bool &val) {
     USB_Serial::enabled = val;
-    if(val) {
+    if (val) {
         USB_Serial::transmit("USB serial enabled\r\n");
     }
 }
@@ -50,7 +50,7 @@ void USB_Serial::transmitLines(const std::string &dataToSend) {
     for (const auto &c : dataToSend) {
         line.push_back(c);
         if (c == '\n') {
-            if(line[0] != '\r') {
+            if (line[0] != '\r') {
                 USB_Serial::transmit(line);
             }
             line.clear();

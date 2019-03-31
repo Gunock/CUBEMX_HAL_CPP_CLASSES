@@ -35,7 +35,7 @@ public:
 
     bool transmit(const std::string &tData) const;
 
-    void discardAll() const;
+    void discard_all() const;
 
     bool receive(uint8_t *rData, const uint16_t &size) const;
 
@@ -43,9 +43,9 @@ public:
 
     bool receive(std::string &rData, const uint16_t &size) const;
 
-    void receiveAll(std::string &rData);
+    void receive_all(std::string &rData);
 
-    void receiveIt(char* rData, const uint16_t &size) const;
+    void receive_interrupt(char *rData, const uint16_t &size) const;
 };
 
 #endif /* UART_HPP_ */

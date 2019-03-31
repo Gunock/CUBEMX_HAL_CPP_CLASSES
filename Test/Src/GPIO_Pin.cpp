@@ -2,13 +2,14 @@
  * GPIO_Pin.cpp
  *
  *  Created on: Dec 16, 2018
- *      Author: Tomasz Kiljañczyk
+ *      Author: Tomasz KiljaÅ„czyk
  */
 
 #include "GPIO_Pin.hpp"
 
 // STL
-#include <unordered_map>
+#include <map>
+#include <GPIO_Pin.hpp>
 
 
 /*
@@ -18,70 +19,79 @@
  * @param GPIO_Pin specifies the port bit.
  * @retval None
  */
-GPIO_Pin::GPIO_Pin(GPIO_TypeDef* GPIOx, const uint16_t& GPIO_Pin) : port(GPIOx), pin(GPIO_Pin) {}
+GPIO_Pin::GPIO_Pin(GPIO_TypeDef* GPIOx, const uint16_t& GPIO_Pin) noexcept : port(GPIOx), number(GPIO_Pin) {}
+
+GPIO_TypeDef* GPIO_Pin::get_port() const
+{
+    return port;
+}
+
+const uint16_t& GPIO_Pin::get_number() const
+{
+    return number;
+}
 
 /*
- * @brief Sets the pin.
+ * @brief Sets the number.
  * @retval None
  */
 void GPIO_Pin::on() const
 {
-	HAL_GPIO_WritePin(port, pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(port, number, GPIO_PIN_SET);
 }
 
 /*
- * @brief Clears the pin.
+ * @brief Clears the number.
  * @retval None
  */
 void GPIO_Pin::off() const
 {
-	HAL_GPIO_WritePin(port, pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(port, number, GPIO_PIN_RESET);
 }
 
 /*
- * @brief Toggles the pin.
+ * @brief Toggles the number.
  * @retval None
  */
 void GPIO_Pin::toggle() const
 {
-	HAL_GPIO_TogglePin(port, pin);
+	HAL_GPIO_TogglePin(port, number);
 }
 
 /*
- * @brief Sets or clears the pin.
+ * @brief Sets or clears the number.
  * @param state specifies the value to be written.
  *          This parameter can be bool value:
- *           	@arg true: to clear the pin
- *           	@arg false: to set the pin
+ *           	@arg true: to set the number
+ *           	@arg false: to clear the number
  * @retval None
  */
 void GPIO_Pin::write(const bool& state) const
 {
-	if (state == false) 	{ HAL_GPIO_WritePin(port, pin, GPIO_PIN_RESET); }
-	else if (state == true) { HAL_GPIO_WritePin(port, pin, GPIO_PIN_SET); 	}
+	if (!state) 	{ HAL_GPIO_WritePin(port, number, GPIO_PIN_RESET); }
+	else { HAL_GPIO_WritePin(port, number, GPIO_PIN_SET); 	}
 }
 
 /*
- * @brief Sets or clears the pin.
+ * @brief Sets or clears the number.
  * @param state specifies the value to be written.
  *          This parameter can be one of the GPIO_PinState enum values:
- *           	@arg GPIO_PIN_RESET: to clear the pin
- *           	@arg GPIO_PIN_SET: to set the pin
+ *           	@arg GPIO_PIN_RESET: to clear the number
+ *           	@arg GPIO_PIN_SET: to set the number
  * @retval None
  */
 void GPIO_Pin::write(const GPIO_PinState& state) const
 {
-	HAL_GPIO_WritePin(port, pin, state);
+	HAL_GPIO_WritePin(port, number, state);
 }
 
 /*
- * @brief Reads the pin.
- * @retval The pin value.
+ * @brief Reads the number.
+ * @retval The number value.
  */
 bool GPIO_Pin::read() const
 {
-	if (HAL_GPIO_ReadPin(port, pin) == GPIO_PIN_RESET) { return false; }
-	else { return true; }
+	return (HAL_GPIO_ReadPin(port, number) == GPIO_PIN_SET);
 }
 
 
@@ -99,18 +109,11 @@ void pins_toggle(const std::initializer_list<const GPIO_Pin*>& pins)
 	{
 		/*
 		 * key: GPIO port
-		 * value: pin sum
-		 * max_size: 5 (ports A, B, C, D, E)
+		 * value: number sum
 		 */
-		std::unordered_map<GPIO_TypeDef*, uint16_t> portPinMap {
-			{GPIOA, 0},
-			{GPIOB, 0},
-			{GPIOC, 0},
-			{GPIOD, 0},
-			{GPIOE, 0}
-		};
+		std::map<GPIO_TypeDef*, uint16_t> portPinMap;
 
-		for(const GPIO_Pin* pin : pins) { portPinMap[pin->port] |= pin->pin; }
+		for(const GPIO_Pin* pin : pins) { portPinMap[pin->get_port()] |= pin->get_number(); }
 		for(const auto& elem : portPinMap)
 		{
 			if(elem.second != 0){ HAL_GPIO_TogglePin(elem.first, elem.second); }
@@ -122,8 +125,8 @@ void pins_toggle(const std::initializer_list<const GPIO_Pin*>& pins)
  * @brief Sets or clears group of pins.
  * @param state specifies the value to be written.
  *          This parameter can be one of the GPIO_PinState enum values:
- *           	@arg GPIO_PIN_RESET: to clear the pin
- *           	@arg GPIO_PIN_SET: to set the pin
+ *           	@arg GPIO_PIN_RESET: to clear the number
+ *           	@arg GPIO_PIN_SET: to set the number
  * @retval None
  */
 void pins_write(const std::initializer_list<const GPIO_Pin*>& pins, const GPIO_PinState& state)
@@ -132,18 +135,11 @@ void pins_write(const std::initializer_list<const GPIO_Pin*>& pins, const GPIO_P
 	{
 		/*
 		 * key: GPIO port
-		 * value: pin sum
-		 * max_size: 5 (ports A, B, C, D, E)
+		 * value: number sum
 		 */
-		std::unordered_map<GPIO_TypeDef*, uint16_t> portPinMap {
-			{GPIOA, 0},
-			{GPIOB, 0},
-			{GPIOC, 0},
-			{GPIOD, 0},
-			{GPIOE, 0}
-		};
+		std::map<GPIO_TypeDef*, uint16_t> portPinMap;
 
-		for(const GPIO_Pin* pin : pins) { portPinMap[pin->port] |= pin->pin; }
+		for(const GPIO_Pin* pin : pins) { portPinMap[pin->get_port()] |= pin->get_number(); }
 		for(const auto& elem : portPinMap)
 		{
 			if(elem.second != 0) { HAL_GPIO_WritePin(elem.first, elem.second, state); }
@@ -155,8 +151,8 @@ void pins_write(const std::initializer_list<const GPIO_Pin*>& pins, const GPIO_P
  * @brief Sets or clears group of pins.
  * @param state specifies the value to be written.
  *          This parameter can be bool value:
- *           	@arg true: to clear the pin
- *           	@arg false: to set the pin
+ *           	@arg true: to set the number
+ *           	@arg false: to clear the number
  * @retval None
  */
 void pins_write(const std::initializer_list<const GPIO_Pin*>& pins, const bool& state)

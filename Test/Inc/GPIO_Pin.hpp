@@ -2,23 +2,27 @@
  * GPIO_Pin.h
  *
  *  Created on: Dec 16, 2018
- *      Author: Tomasz Kiljañczyk
+ *      Author: Tomasz Kiljaï¿½czyk
  */
 
 #ifndef GPIO_PIN_HPP_
 #define GPIO_PIN_HPP_
 
-#include "main.h"
 #include <initializer_list>
+#include "main.h"
 
 
 class GPIO_Pin final {
-public:
+private:
 	GPIO_TypeDef* port;
-	const uint16_t pin = -1;
+	const uint16_t number = 0;
 
-	explicit GPIO_Pin(GPIO_TypeDef* GPIOx, const uint16_t& GPIO_Pin);
+public:
+	explicit GPIO_Pin(GPIO_TypeDef* GPIOx, const uint16_t& GPIO_Pin) noexcept;
 	~GPIO_Pin() = default;
+
+	GPIO_TypeDef* get_port() const;
+	const uint16_t& get_number() const;
 
 	void on() const;
 	void off() const;

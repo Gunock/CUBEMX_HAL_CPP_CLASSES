@@ -2,7 +2,7 @@
  * DAC12.hpp
  *
  *  Created on: Dec 17, 2018
- *      Author: Tomasz Kiljañczyck
+ *      Author: Tomasz Kilja?czyck
  */
 
 #ifndef DAC12_HPP_
@@ -28,6 +28,7 @@ public:
 	const int16_t get_value() const;
 
 	void start() const;
+	void stop() const;
 };
 
 #endif /* DAC12_HPP_ */

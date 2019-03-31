@@ -2,7 +2,7 @@
  * DAC12.cpp
  *
  *  Created on: Dec 17, 2018
- *      Author: Tomasz Kiljañczyck
+ *      Author: Tomasz Kilja?czyck
  */
 
 #include <DAC12.hpp>
@@ -26,4 +26,8 @@ const int16_t DAC12::get_value() const { return this->value; }
 
 void DAC12::start() const {
 	HAL_DAC_Start(handle, channel);
+}
+
+void DAC12::stop() const {
+    HAL_DAC_Stop(handle, channel);
 }

@@ -22,7 +22,7 @@ void interrupt_with_instance(const std::map<TypeDef *, std::vector<void (*)()>> 
 std::map<uint16_t, std::vector<void (*)()>> Interrupts::gpioInterrupts;
 
 void Interrupts::add_gpio_interrupt(const GPIO_Pin &PIN, void(*func)()) {
-    Interrupts::gpioInterrupts[PIN.getNumber()].push_back(func);
+    Interrupts::gpioInterrupts[PIN.get_number()].push_back(func);
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {

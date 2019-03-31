@@ -32,8 +32,7 @@ bool UART::transmit(uint8_t *tData, const uint16_t &size) const {
     if (handle != nullptr) {
         const auto result = HAL_UART_Transmit(handle, tData, size, TIMEOUT);
         return result == HAL_OK;
-    }
-    else { return false; }
+    } else { return false; }
 }
 
 bool UART::transmit(const char *tData) const {
@@ -42,23 +41,20 @@ bool UART::transmit(const char *tData) const {
         uint8_t converted[size];
         for (int16_t i = 0; i < size; i++) { converted[i] = (uint8_t) tData[i]; }
         return this->transmit(converted, size);
-    }
-    else { return false; }
+    } else { return false; }
 }
 
 bool UART::transmit(const char *tData, const uint16_t &size) const {
     if (handle != nullptr) {
         return this->transmit((uint8_t *) tData, size);
-    }
-    else { return false; }
+    } else { return false; }
 }
 
 
 bool UART::transmit(const std::string &tData) const {
     if (handle != nullptr) {
         return this->transmit((uint8_t *) tData.c_str(), (uint16_t) tData.size());
-    }
-    else { return false; }
+    } else { return false; }
 }
 
 
@@ -66,8 +62,7 @@ bool UART::receive(uint8_t *rData, const uint16_t &size) const {
     if (handle != nullptr) {
         const auto result = HAL_UART_Receive(handle, rData, size, TIMEOUT);
         return result == HAL_OK;
-    }
-    else { return false; }
+    } else { return false; }
 }
 
 bool UART::receive(char *rData, const uint16_t &size) const {
@@ -83,16 +78,15 @@ bool UART::receive(string &rData, const uint16_t &size) const {
             rData = string((char *) rData_);
             return true;
         }
-    }
-    else { return false; }
+    } else { return false; }
 }
 
-void UART::discardAll() const {
+void UART::discard_all() const {
     char tempC[1];
     while (this->receive(tempC, 1)) {}
 }
 
-void UART::receiveAll(std::string &rData) {
+void UART::receive_all(std::string &rData) {
     std::string result;
     char tempC[1];
     while (this->receive(tempC, 1)) { result.push_back(tempC[0]); }
@@ -101,6 +95,6 @@ void UART::receiveAll(std::string &rData) {
     rData = result;
 }
 
-void UART::receiveIt(char* rData, const uint16_t &size) const {
-    HAL_UART_Receive_IT(handle, (uint8_t*)rData, size);
+void UART::receive_interrupt(char *rData, const uint16_t &size) const {
+    HAL_UART_Receive_IT(handle, (uint8_t *) rData, size);
 }
