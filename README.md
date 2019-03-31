@@ -3,11 +3,11 @@ Wrapper classes made to be used with CubeMX generated projects converted to C++.
 
 ## What's done
 - GPIO wrapper (with functions for multi pin toggle/write)
-- Timer wrapper
-- ADC and DAC wrappers
-- UART wrapper
+- Timer
+- ADC and DAC
+- UART
 - USB VCP (transmit only)
-- Interrupts wrapper
+- Interrupts
 
 ## Test project
 Test project is included in this repo. It's located in test folder. It was made for STM32F4 Discovery (STM32F407).
@@ -82,7 +82,7 @@ IMPORTANT: To use C++ wrappers first you have to configure desired periphery in 
   uart.discard_all();	     // Discards data until not receiving
 ```
 ### USB VCP
-IMPORTANT: In order for this class to work you need to include USB_Serial.hpp in usb_device.c and use USB_Serial_init function in USB_Init_PostTreatment section. REMEMBER to write your code in USER sections.
+IMPORTANT: In order for this class to work you need to include **USB_Serial.hpp** in **usb_device.c** and use USB_Serial_init function in USB_Init_PostTreatment section. REMEMBER to write your code in USER sections.
 ```cpp
   // USB_Serial is static class
   // Methods
