@@ -1,5 +1,5 @@
 # CUBEMX_HAL_CPP_WRAPPER
-Wrapper classes made to be used with CubeMX generated projects converted to C++.
+Wrapper classes made to be used with CubeMX generated projects converted to C++. It's my personal project I made to make programming STM32F4 in C++ easier.
 
 ## What's done
 - GPIO wrapper (with functions for multi pin toggle/write)
