@@ -82,6 +82,7 @@ IMPORTANT: To use C++ wrappers first you have to configure desired periphery in 
   uart.discard_all();	     // Discards data until not receiving
 ```
 ### USB VCP
+IMPORTANT: In order for this class to work you need to include USB_Serial.hpp in usb_device.c and use USB_Serial_init function in USB_Init_PostTreatment section. REMEMBER to write your code in USER sections.
 ```cpp
   // USB_Serial is static class
   // Methods
