@@ -1,7 +1,7 @@
 # CUBEMX_HAL_CPP_WRAPPER
 Wrapper classes made to be used with CubeMX generated projects converted to C++.
 
-## Whats done
+## What's done
 - GPIO wrapper (with functions for multi pin toggle/write)
 - Timer wrapper
 - ADC and DAC wrappers
@@ -21,7 +21,7 @@ IMPORTANT: To use C++ wrappers first you have to configure desired periphery in 
 ### GPIO_Pin
 ```cpp
   // Constructor
-	GPIO_Pin blueLED(GPIOD, GPIO_PIN_15);
+  GPIO_Pin blueLED(GPIOD, GPIO_PIN_15);
   
   // Switch state methods
   blueLed.on();
@@ -44,17 +44,63 @@ IMPORTANT: To use C++ wrappers first you have to configure desired periphery in 
   tim4.stop();
   
   // PWM methods
-  tim4.start_PWM_channel(1) // Starts given PWM channel
-  tim4.set_PWM_channel_ccr(1,100)
+  tim4.start_PWM_channel(channel)
+  tim4.set_PWM_channel_ccr(channel, ccr)
   
   // Other methods
-  tim4.set_period(100);
-  tim4.set_prescaler(100);
-  tim4.set(100,100)         // Combined above methods, first argument is prescaler, second is period
+  tim4.set_prescaler(psc);
+  tim4.set_period(per);
+  tim4.set(psc, per)        // Combined above methods, first argument is prescaler, second is period
   tim4.interrupt_enable();
   tim4.inerrupt_disable();
 ```
 ### ADC/DAC
+```cpp
+  // Constructors
+  ADC12 adc1(&hadc1);
+  DAC12 dac(&hdac);
+  
+  // DAC methods
+  dac.set_value(val);
+  dac.start();
+  dac.stop();
+  
+  // ADC methods
+  adc.read_value();
+  adc.read_voltage();
+```
 ### UART
-### USB VCPt
+```cpp
+  // Constructor
+  UART uart(&huart3);
+  
+  // Methods
+  uart.transmit("text");
+  uart.receive(string, size);
+  uart.receive(cString, size);
+  uart.receive_all(string);  // Saves data until not receiving
+  uart.discard_all();	     // Discards data until not receiving
+```
+### USB VCP
+```cpp
+  // USB_Serial is static class
+  // Methods
+  USB_Serial::transmit(string);
+```
 ### Interrupts
+```cpp
+  // Interrupts is static class
+  // used_headers.h file required (include there all wrappers that you use)
+ 
+  // Adds function to interrupts (must be void)
+  Interrupts::add_moduleName_interrupt(module_class, &func);
+ 
+  // Removes specific function from interrupts
+  Interrupts::remove_moduleName_interrupt(module_class, &void_func_ptr);
+```
+### Init methods
+Use init methods when using constructors causes problems.
+```cpp
+  moduleClass obj;
+  obj.init(&handle);
+```
