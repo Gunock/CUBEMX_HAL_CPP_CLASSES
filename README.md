@@ -1,4 +1,4 @@
-# CUBEMX_HAL_CPP_WRAPPER
+# CUBEMX HAL CPP WRAPPER
 Wrapper classes made to be used with CubeMX generated projects converted to C++. It's my personal project I made to make programming STM32F4 in C++ easier.
 
 ## What's done
@@ -13,11 +13,11 @@ Wrapper classes made to be used with CubeMX generated projects converted to C++.
 Test project is included in this repo. It's located in test folder. It was made for STM32F4 Discovery (STM32F407).
 
 ## How to compile C++ for STM
-To compile C++ program for STM you have to rename main.c to main.cpp. If that won't work then you have to change makefile to use C++ compiler for .cpp.
-The second opiton is to use CLion. To do that i recommend to follow this [tutorial](https://blog.jetbrains.com/clion/2017/12/clion-for-embedded-development-part-ii/).
+To compile C++ program for STM, rename main.c to main.cpp. If that won't work, then change makefile to use C++ compiler for .cpp.
+The second option is to use CLion. To do that i recommend following this [tutorial](https://blog.jetbrains.com/clion/2017/12/clion-for-embedded-development-part-ii/).
 
 ## Examples
-IMPORTANT: To use C++ wrappers first you have to configure desired periphery in CubeMX!
+IMPORTANT: To use C++ wrappers, first configure desired periphery in CubeMX!
 ### GPIO_Pin
 ```cpp
   // Constructor
@@ -82,7 +82,7 @@ IMPORTANT: To use C++ wrappers first you have to configure desired periphery in 
   uart.discard_all();	     // Discards data until not receiving
 ```
 ### USB VCP
-IMPORTANT: In order for this class to work you need to include **USB_Serial.hpp** in **usb_device.c** and use USB_Serial_init function in USB_Init_PostTreatment section. REMEMBER to write your code in USER sections.
+IMPORTANT: For this class to work you need to include **USB_Serial.hpp** in **usb_device.c** and use USB_Serial_init function in USB_Init_PostTreatment section. REMEMBER to write your code in USER sections.
 ```cpp
   // USB_Serial is static class
   // Methods
@@ -90,7 +90,7 @@ IMPORTANT: In order for this class to work you need to include **USB_Serial.hpp*
 ```
 ### Interrupts
 ```cpp
-  // Interrupts is static class
+  // Interrupts is a static class
   // used_headers.h file required (include there all wrappers that you use)
  
   // Adds function to interrupts (must be void)
